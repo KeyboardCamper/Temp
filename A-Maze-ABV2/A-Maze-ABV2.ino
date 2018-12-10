@@ -293,9 +293,9 @@ void displayBattery(uint8_t font){
 
   arduboy.setTextColor(font);
   arduboy.setCursor(50,0);
-  arduboy.print("vcc:");/////////////////////////////////////
+ // arduboy.print("vcc:");/////////////////////////////////////
   int batt=readVcc(); 
-  arduboy.print(batt);////////////////////////////////////////
+  //arduboy.print(batt);////////////////////////////////////////
 
   arduboy.drawLine(114,1,125,1,font);
   arduboy.drawLine(114,6,125,6,font);

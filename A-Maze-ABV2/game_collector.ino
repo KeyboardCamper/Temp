@@ -20,8 +20,7 @@ void collector(){
   bool wall;
   
   if(!gamePaused){
-    
-    //GAME CONTROL
+     //GAME CONTROL
     
     /* ------- BUTTON 1 - LEFT ------- */
     if(arduboy.pressed(LEFT_BUTTON)){
