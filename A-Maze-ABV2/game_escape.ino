@@ -57,7 +57,6 @@ void escapeGameOverMenu(){
   arduboy.setTextColor(BLACK);
   arduboy.fillRect(26,10,76,11,WHITE);
   arduboy.setTextBackground(WHITE);
-  arduboy.fillRect(26,10,76,11,WHITE);
   arduboy.setCursor(48,12);
   arduboy.setCursor(37,12);
   arduboy.print("GAME OVER");
