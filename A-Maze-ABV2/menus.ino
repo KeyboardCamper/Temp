@@ -128,7 +128,7 @@ void mainMenu(){
   }*/
     }
   if (arduboy.pressed(B_BUTTON)){//menu/start
-    //arduboy.generateRandomSeed();
+    arduboy.generateRandomSeed();
     gameMode=selectedOption;
     generateMaze();
     if(selectedOption==2){
@@ -218,7 +218,8 @@ void gameMenu(){
 //       button7State = digitalRead(button7Pin);
     }
     if(selectedOption==2){
-       asm volatile ("  jmp 0");
+      arduboy.clear();
+      asm volatile ("  jmp 0");
     }
     tunes.tone(1600,5);
   }

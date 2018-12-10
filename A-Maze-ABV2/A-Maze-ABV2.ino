@@ -17,7 +17,7 @@ Arduboy2 arduboy;
 
 ArduboyPlaytune tunes(arduboy.audio.enabled);
 
-const unsigned int FRAME_RATE = 15;
+const unsigned int FRAME_RATE = 25;
 
 
  // 'title', 128x64px
@@ -293,9 +293,9 @@ void displayBattery(uint8_t font){
 
   arduboy.setTextColor(font);
   arduboy.setCursor(50,0);
-  //arduboy.print("vcc:");/////////////////////////////////////
+  arduboy.print("vcc:");/////////////////////////////////////
   int batt=readVcc(); 
-//  arduboy.print(batt);////////////////////////////////////////
+  arduboy.print(batt);////////////////////////////////////////
 
   arduboy.drawLine(114,1,125,1,font);
   arduboy.drawLine(114,6,125,6,font);
@@ -332,16 +332,18 @@ void displayBattery(uint8_t font){
 }
 
  int readVcc() {
-  arduboy.initRandomSeed();
+//  delayShort(1000);
+  //arduboy.initRandomSeed();//dont think needed
   power_adc_enable();// ADC on
   int result; // Read 1.1V reference against AVcc
   ADMUX = _BV(REFS0) | _BV(MUX4) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
-  delay(2); // Wait for Vref to settle
+  delay(2); // wait for Vref to settle after the mux change
   ADCSRA |= _BV(ADSC); // Convert
   while (bit_is_set(ADCSRA,ADSC));
-  result = ADCL;
-  result |= ADCH<<8;
-  result = 1126400L / result;
+ // result = ADCL;
+  //result |= ADCH<<8;
+  result = ADCW;//use ADCW to get the upper and lower registers in one
+  result = 1125300L / result -249;// AVcc in mV = 1.1*1023*1000 = 1125300
   // Back-calculate AVcc in mV
   return result;
   power_adc_disable(); // ADC off
